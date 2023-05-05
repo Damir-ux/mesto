@@ -1,0 +1,25 @@
+.profile__button-edit {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    text-align: left;
+    font-family: "Inter", Arial, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 18px;
+    margin: 33px 0 0 0;
+    padding: 0;
+    background-color: black;
+    border: 1px solid #FFFFFF;
+    height: 18px;
+    width: 18px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.profile__button-edit:hover{
+    opacity: 0.6;
+}
+

@@ -1,0 +1,10 @@
+.header {
+    min-height: 56px;
+    min-width: 320px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+    border-bottom: 1px solid #545454;
+  }

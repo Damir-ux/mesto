@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>        
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Место</title>
+        <link rel="stylesheet" href="./pages/index.css" />
+    </head>
+    <body class="content">
+        <div class="page">
+            <header class="header">
+                <img src="./images/logo.svg" alt="Лого" class="header__logo" />
+            </header>
+            <main>
+                <section class="profile">
+                    <img src="./images/image.jpg" alt="Место" class="profile__avatar" />
+                    <div class="profile__column" >
+                        <div class="profile__choise">
+                            <h1 class="profile__title">Жак-Ив Кусто</h1>
+                            <button class="profile__button-edit"><img src="./images/Pens.svg" alt="Редактирование" class="profile__open"></button>
+                        </div>
+                        <p class="profile__subtitle">Исследователь океана</p>
+                    </div>
+                    <button class="profile__button-add" type="button"><img src="./images/Plus.svg" alt="Добавление" class="profile__image"></button>
+                </section>
+
+                <section class="photo-grid">
+                    <figure class="photo-grid__item">
+                        <img src="./images/Karachaevsk.jpg" alt="Карачаевск" class="photo-grid__image"/>
+                        <div class="photo-grid__signature">
+                            <p class="photo-grid__text">Карачаевск</p>
+                            <button   class="photo-grid__button" type="button"><img src="./images/Vector.svg" alt="Лайк"></button>
+                        </div>
+                    </figure>
+                    <figure class="photo-grid__item">
+                        <img src="./images/Elbrus.jpg" alt="Эльбрус" class="photo-grid__image"/>
+                        <div class="photo-grid__signature">
+                            <p class="photo-grid__text">Гора Эльбрус</p>
+                            <button class="photo-grid__button" type="button"><img src="./images/Vector.svg" alt="Лайк"></button>
+                        </div>
+                    </figure>
+                    <figure class="photo-grid__item">
+                        <img src="./images/Dombay.jpg" alt="Домбай" class="photo-grid__image" />
+                        <div class="photo-grid__signature">
+                            <p class="photo-grid__text">Домбай</p>
+                            <button class="photo-grid__button" type="button"><img src="./images/Vector.svg" alt="Лайк"></button>
+                        </div>
+                    </figure>
+                    <figure class="photo-grid__item">
+                        <img src="./images/Elbrus2.jpg" alt="Гора Эльбрус-2" class="photo-grid__image" />
+                        <div class="photo-grid__signature">
+                            <p class="photo-grid__text">Гора Эльбрус</p>
+                            <button class="photo-grid__button" type="button"><img src="./images/Vector.svg" alt="Лайк"></button>
+                        </div>
+                    </figure>
+                    <figure class="photo-grid__item">
+                        <img src="./images/Dombay2.jpg" alt="Домбай-2" class="photo-grid__image" />
+                        <div class="photo-grid__signature">
+                            <p class="photo-grid__text">Домбай</p>
+                            <button class="photo-grid__button" type="button"><img src="./images/Vector.svg" alt="Лайк"></button>
+                        </div>
+                    </figure>
+                    <figure class="photo-grid__item">
+                        <img src="./images/Karachaevo-Cherk.jpg" alt="Карачаево-Ч" class="photo-grid__image"/>
+                        <div class="photo-grid__signature">
+                            <p class="photo-grid__text">Карачаево-Ч...</p>
+                            <button class="photo-grid__button" type="button"><img src="./images/Vector.svg" alt="Лайк"></button>
+                        </div>
+                    </figure>
+                </section>
+
+            </main>
+
+            <footer class="footer">
+                    <p class="footer__author">© 2023 Mesto Russia </p>
+            </footer>
+        </div>
+        <div class="popup">
+            <div class="popup__body">
+                <div class="popup__container">
+                    <button type="button" class="popup__close"><img src="./images/Close Icon.png" alt="Закрытие"></button>
+                    <div class="popup__content">
+                        <div class="popup__title">Редактировать профиль</div>
+                        <form class="popup__form" name="PopupForm">
+                            <input class="popup__text" placeholder="Жак-Ив Кусто">
+                            <input class="popup__text" placeholder="Исследователь океана">
+                        </form>
+                        <button class="popup__button" type="button"><p class="popup__button-text">Сохранить</p></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type ="text/javascript" src="../mesto/index.js" defer></script>
+    </body>
+</html>

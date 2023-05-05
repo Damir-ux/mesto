@@ -1,0 +1,13 @@
+.photo-grid__button{
+    padding: 0;
+    border: 0;
+    background-color: #FFFFFF;
+}
+
+.photo-grid__button:hover{
+    opacity: 0.5;
+}
+
+.photo-grid__button:active{
+    background: #000000;
+}

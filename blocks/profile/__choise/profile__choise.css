@@ -1,0 +1,12 @@
+.profile__choise{
+    display: flex;
+    gap: 14px;
+    margin: 0;
+    padding-left: 65px;
+}
+
+@media (min-width: 1280px) {
+    .profile__choise{
+        padding: 0;
+    }
+  }

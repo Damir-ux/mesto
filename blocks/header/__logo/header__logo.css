@@ -1,0 +1,20 @@
+.header__logo {   
+    z-index: 2;
+    width: 103.74px;
+    height: 24.4px;
+    margin-left: 27px;
+    margin-top: 28px;
+    color: #FFFFFF;
+    padding-bottom: 31.6px;
+}
+  
+
+  @media (min-width: 1280px) {
+    .header__logo{
+        width: 142px;
+        height: 33px;
+        margin-left: 200px;
+        margin-top: 45px;
+        padding-bottom: 41px;
+    }
+}

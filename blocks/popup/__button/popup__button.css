@@ -1,0 +1,27 @@
+.popup__button{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+    background: #000000;
+    border-radius: 2px;
+    width: 238px;
+    height: 46px;
+    justify-content: center;
+    margin: 45px auto 25px;
+    display: flex;
+}
+
+.popup__button:hover{
+    opacity: 0.8;
+}
+
+@media (min-width: 1280px) {
+    .popup__button{
+        width: 358px;
+        height: 50px;
+    }
+}
