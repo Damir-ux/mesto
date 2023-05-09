@@ -7,7 +7,3 @@
 .photo-grid__button:hover{
     opacity: 0.5;
 }
-
-.photo-grid__button:active{
-    background: #000000;
-}

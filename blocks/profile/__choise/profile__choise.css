@@ -1,8 +1,9 @@
 .profile__choise{
     display: flex;
     gap: 14px;
-    margin: 0;
-    padding-left: 65px;
+    margin: 0 auto 0;
+    padding-left: auto;
+    padding-right: auto;
 }
 
 @media (min-width: 1280px) {

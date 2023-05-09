@@ -8,6 +8,12 @@
     padding-bottom: 13px;
     margin: 0 auto 0;
     text-align: left;
-    outline:none;
+    outline: none;
+    opacity: 0.2;
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    text-overflow: ellipsis;
+    min-width: 238px;
+    width: 100%;
 }
 
