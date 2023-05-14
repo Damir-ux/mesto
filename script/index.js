@@ -1,8 +1,8 @@
 const popupElement = document.querySelector('.popup');
 const popupCloseButtonElement = document.querySelector('.popup__close');
 const popupOpenButtonElement = document.querySelector('.profile__button-edit');
-const profileTitleNode = document.querySelector('.popup__input_type_name');
-const profileSubtitleNode = document.querySelector('.popup__input_type_profession');
+const profileTitleNode = document.querySelector('.profile__title');
+const profileSubtitleNode = document.querySelector('.profile__subtitle');
 
 // let $like = document.querySelector('.photo-grid__button');
 // $like.addEventListener( 'click', () => 
