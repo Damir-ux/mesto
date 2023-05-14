@@ -1,7 +1,15 @@
 .photo-grid__button{
+    display: flex;
     padding: 0;
     border: 0;
-    background-color: #FFFFFF;
+    background-image: url(../../../images/Vector.svg);
+    background-position: center;
+    background-size: cover;
+    height: 19px;
+    width: 22px;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 8px;
 }
 
 .photo-grid__button:hover{

@@ -1,13 +1,13 @@
 .profile__choise{
     display: flex;
-    gap: 14px;
+    gap: 11px;
     margin: 0 auto 0;
-    padding-left: auto;
-    padding-right: auto;
+    padding-left: 28px;
 }
 
 @media (min-width: 1280px) {
     .profile__choise{
         padding: 0;
+        gap: 20px;
     }
   }

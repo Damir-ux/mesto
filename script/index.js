@@ -1,12 +1,12 @@
 const popupElement = document.querySelector('.popup');
-const popupCloseButtonElement = popupElement.querySelector('.popup__close');
+const popupCloseButtonElement = document.querySelector('.popup__close');
 const popupOpenButtonElement = document.querySelector('.profile__button-edit');
-const profileTitleNode = document.querySelector('.profile__title');
-const profileSubtitleNode = document.querySelector('.profile__subtitle');
+const profileTitleNode = document.querySelector('.popup__input_type_name');
+const profileSubtitleNode = document.querySelector('.popup__input_type_profession');
 
-let $like = document.querySelector('.photo-grid__button');
-$like.addEventListener( 'click', () => 
-$like.classList.toggle('photo-grid__button_active') )
+// let $like = document.querySelector('.photo-grid__button');
+// $like.addEventListener( 'click', () => 
+// $like.classList.toggle('photo-grid__button_active') )
 
 
 function openPopup() {
@@ -42,18 +42,22 @@ popupOpenButtonElement.addEventListener('click', openPopup);
 popupCloseButtonElement.addEventListener('click', closePopup);
 // popupElement.addEventListener('click', closePopupByClickOnOverlay)
 
-let formElement = document.querySelector(".popup__button");
-// Находим поля формы в DOM
-let nameInput = document.querySelector(".popup__text_title");
-let jobInput = document.querySelector(".popup__text_subtitle");
+let formElement = document.querySelector(".popup__form");
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-function handleFormSubmit (evt) {
+
+// Находим поля формы в DOM
+let nameInput = document.querySelector(".popup__input_type_name");
+let jobInput = document.querySelector(".popup__input_type_profession");
+
+
+
+function handleFormSubmit (evt) {      
     evt.preventDefault();
     setNodeTextValue();
+    closePopup();
 }
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('click', handleFormSubmit);
+formElement.addEventListener('submit', handleFormSubmit);
+
