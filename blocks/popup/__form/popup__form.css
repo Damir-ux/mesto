@@ -11,6 +11,5 @@
 @media (min-width: 1280px) {
     .popup__form{
         gap: 24px;
-        padding-bottom: 0;
     }
 }

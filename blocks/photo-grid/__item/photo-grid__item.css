@@ -11,4 +11,5 @@
   background: #FFFFFF;
   border-radius: 10px 10px 10px 10px;
   overflow: hidden;
+  background-size: cover;
 }

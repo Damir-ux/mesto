@@ -11,10 +11,11 @@
 
   @media (min-width: 1280px) {
     .header__logo{
+        display: flex;
         width: 142px;
         height: 33px;
-        margin-left: 200px;
         margin-top: 45px;
         padding-bottom: 41px;
+        margin-left: 0;
     }
 }
