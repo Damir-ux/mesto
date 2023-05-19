@@ -12,12 +12,6 @@ function openPopup() {
     popupElement.classList.add('popup_opened');
     nameInput.value = profileTitleNode.textContent.trim();
     jobInput.value = profileSubtitleNode.textContent.trim();
-
-}
-
-function setPopupInputValue(){
-    nameInput.value = profileTitleNode.textContent.trim();
-    jobInput.value = profileSubtitleNode.textContent.trim();
 }
 
 function setNodeTextValue(){
