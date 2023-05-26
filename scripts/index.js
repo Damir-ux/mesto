@@ -195,7 +195,7 @@ deleteButton.addEventListener('click', function(event) {
 
 
   const photoGridItems = document.querySelectorAll('.photo-grid__item');
-  const popupCards = document.querySelector('.popup__cards');
+  const popupCards = document.querySelector('.popup-cards');
   const popupPhoto = document.querySelector('.popup__photo');
   const popupPhotoCap = document.querySelector('.popup__photo-cap');
   const popupCloseCards = document.querySelector('.popup__close_cards');
