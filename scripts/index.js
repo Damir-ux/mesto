@@ -129,7 +129,7 @@ profileForm.addEventListener('submit', function (event) {
 
 addForm.addEventListener('submit', function (event) {
   event.preventDefault();
-  // Retrieve and process the form data
+ 
   const titleInput = addForm.elements.title;
   const linkInput = addForm.elements.link;
   const newData = {
