@@ -53,15 +53,37 @@ const initialCards = [
  
 const nameInput = profilePopup.querySelector('.popup__input_type_name');
 const professionInput = profilePopup.querySelector('.popup__input_type_profession');
+// оверлей
+const profilePopupContainer = document.querySelector('.profile-popup');
+const addPopupContainer = document.querySelector('.popup-add');
+const imagePopupContainer = document.querySelector('.popup-cards');
+
+
+function handleEscKey(event) {
+  if (event.key === 'Escape') {
+    closePopup(profilePopup);
+    closePopup(addPopup);
+    closePopup(imagePopup);
+  }
+}
  
 function openPopup(popup) {
-  popup.classList.add('popup_opened');
+  popup.classList.add('popup_opened'); 
+  document.addEventListener('keydown', handleEscKey);
 }
  
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscKey);
 }
  
+function handleOverlayClick(evt) {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(evt.target);
+  }
+}
+
+
 function createCardElement(data) {
   
   const cardElement = cardTemplate.content.cloneNode(true).querySelector('.photo-grid__item');
@@ -77,8 +99,7 @@ function createCardElement(data) {
   deleteButton.addEventListener('click', function () {
     cardElement.remove();
   });
- 
-  // const viewButton = cardElement.querySelector('.photo-grid__image');
+   
   imageElement.addEventListener('click', function () {
     popupPhoto.src = data.link;
     popupPhoto.alt = data.name;
@@ -153,3 +174,7 @@ addPopupCloseButton.addEventListener('click', function () {
 imagePopupCloseButton.addEventListener('click', function () {
   closePopup(imagePopup);
 });
+
+profilePopupContainer.addEventListener('click', handleOverlayClick);
+addPopupContainer.addEventListener('click', handleOverlayClick);
+imagePopupContainer.addEventListener('click', handleOverlayClick);
