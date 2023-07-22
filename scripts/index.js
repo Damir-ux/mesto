@@ -61,20 +61,32 @@ const imagePopupContainer = document.querySelector('.popup-cards');
 
 function handleEscKey(event) {
   if (event.key === 'Escape') {
-    closePopup(profilePopup);
-    closePopup(addPopup);
-    closePopup(imagePopup);
+    const openPopup = document.querySelector('.popup_opened');
+    if (openPopup) {
+      closePopup(openPopup);
+    }
   }
 }
+
  
 function openPopup(popup) {
   popup.classList.add('popup_opened'); 
   document.addEventListener('keydown', handleEscKey);
+  const submitButtonElement = popup.querySelector('.popup__button');
+  if (submitButtonElement) {
+    submitButtonElement.setAttribute('disabled', 'true');
+    submitButtonElement.classList.add('popup__button_disabled');
+  }
 }
  
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleEscKey);
+    const inputElements = popup.querySelectorAll('.popup__input');
+    inputElements.forEach((inputElement) => {
+      const errorElement = popup.querySelector(`#${inputElement.name}-error`);
+      hideInputError(inputElement, errorElement, 'popup__input_error', 'popup__error_visible');
+    });
 }
  
 function handleOverlayClick(evt) {
@@ -152,6 +164,8 @@ addForm.addEventListener('submit', function (event) {
   addForm.reset();
   closePopup(addPopup);
 });
+
+
  
 profilePopupOpenButton.addEventListener('click', function () {
   nameInput.value = profileTitle.textContent;
@@ -178,3 +192,20 @@ imagePopupCloseButton.addEventListener('click', function () {
 profilePopupContainer.addEventListener('click', handleOverlayClick);
 addPopupContainer.addEventListener('click', handleOverlayClick);
 imagePopupContainer.addEventListener('click', handleOverlayClick);
+
+
+// enableValidation({
+//   formSelector: '.popup__form',
+//   inputSelector: '.popup__input',
+//   submitButtonSelector: '.popup__button',
+//   inactiveButtonClass: 'popup__button_disabled',
+//   inputErrorClass: 'popup__input_error',
+//   errorClass: 'popup__error_visible',
+// });
+
+
+
+
+
+
+
