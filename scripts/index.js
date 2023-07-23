@@ -1,3 +1,4 @@
+
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
  
@@ -59,6 +60,9 @@ const addPopupContainer = document.querySelector('.popup-add');
 const imagePopupContainer = document.querySelector('.popup-cards');
 
 
+
+
+
 function handleEscKey(event) {
   if (event.key === 'Escape') {
     const openPopup = document.querySelector('.popup_opened');
@@ -71,24 +75,16 @@ function handleEscKey(event) {
  
 function openPopup(popup) {
   popup.classList.add('popup_opened'); 
-  document.addEventListener('keydown', handleEscKey);
-  const submitButtonElement = popup.querySelector('.popup__button');
-  if (submitButtonElement) {
-    submitButtonElement.setAttribute('disabled', 'true');
-    submitButtonElement.classList.add('popup__button_disabled');
+  document.addEventListener('keydown', handleEscKey);  
   }
-}
+
  
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleEscKey);
-    const inputElements = popup.querySelectorAll('.popup__input');
-    inputElements.forEach((inputElement) => {
-      const errorElement = popup.querySelector(`#${inputElement.name}-error`);
-      hideInputError(inputElement, errorElement, 'popup__input_error', 'popup__error_visible');
-    });
+  document.removeEventListener('keydown', handleEscKey);    
 }
- 
+
+
 function handleOverlayClick(evt) {
   if (evt.target.classList.contains('popup')) {
     closePopup(evt.target);
@@ -149,11 +145,13 @@ profileForm.addEventListener('submit', function (event) {
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = professionInput.value;
   closePopup(profilePopup);
+  const submitButtonElement = profileForm.querySelector('.popup__button');
+  const inactiveButtonClass = 'popup__button_disabled';
+  disableSubmitButton(submitButtonElement, inactiveButtonClass);
 });
  
 addForm.addEventListener('submit', function (event) {
   event.preventDefault();
- 
   const titleInput = addForm.elements.title;
   const linkInput = addForm.elements.link;
   const newData = {
@@ -163,6 +161,11 @@ addForm.addEventListener('submit', function (event) {
   addCard(newData);
   addForm.reset();
   closePopup(addPopup);
+
+  const submitButtonElement = addForm.querySelector('.popup__button');
+  const inactiveButtonClass = 'popup__button_disabled';
+  disableSubmitButton(submitButtonElement, inactiveButtonClass);
+  // получилось только так
 });
 
 
@@ -194,18 +197,11 @@ addPopupContainer.addEventListener('click', handleOverlayClick);
 imagePopupContainer.addEventListener('click', handleOverlayClick);
 
 
-// enableValidation({
-//   formSelector: '.popup__form',
-//   inputSelector: '.popup__input',
-//   submitButtonSelector: '.popup__button',
-//   inactiveButtonClass: 'popup__button_disabled',
-//   inputErrorClass: 'popup__input_error',
-//   errorClass: 'popup__error_visible',
-// });
-
-
-
-
-
-
-
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_error',
+  errorClass: 'popup__error_visible',
+});
