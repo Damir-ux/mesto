@@ -1,3 +1,5 @@
+import Card from "./Card.js";
+import Card from "./FormValidator.js";
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -16,12 +18,16 @@ const imagePopupCloseButton = imagePopup.querySelector('.popup__close');
 
  
 const cardContainer = document.querySelector('.photo-grid');
+
+
  
 // createCardElement
-const cardTemplate = document.querySelector('#card-template');
+const cardTemplateSelector = '#card-template';
  
 const popupPhoto = imagePopup.querySelector('.popup__photo');
 const popupCaption = imagePopup.querySelector('.popup__photo-cap');
+
+
 
 
  
@@ -63,6 +69,7 @@ const imagePopupContainer = document.querySelector('.popup-cards');
 
 
 
+
 function handleEscKey(event) {
   if (event.key === 'Escape') {
     const openPopup = document.querySelector('.popup_opened');
@@ -92,43 +99,55 @@ function handleOverlayClick(evt) {
 }
 
 
-function createCardElement(data) {
+
+// function createCardElement(data) {
   
-  const cardElement = cardTemplate.content.cloneNode(true).querySelector('.photo-grid__item');
-  const imageElement = cardElement.querySelector('.photo-grid__image');
-  imageElement.src = data.link;
-  imageElement.alt = data.name;
+//   const cardElement = cardTemplate.content.cloneNode(true).querySelector('.photo-grid__item');
+//   const imageElement = cardElement.querySelector('.photo-grid__image');
+//   imageElement.src = data.link;
+//   imageElement.alt = data.name;
  
-  const textElement = cardElement.querySelector('.photo-grid__text');
-  textElement.textContent = data.name;
+//   const textElement = cardElement.querySelector('.photo-grid__text');
+//   textElement.textContent = data.name;
  
-  const deleteButton = cardElement.querySelector('.photo-grid__trash');
+//   const deleteButton = cardElement.querySelector('.photo-grid__trash');
   
-  deleteButton.addEventListener('click', function () {
-    cardElement.remove();
-  });
+//   deleteButton.addEventListener('click', function () {
+//     cardElement.remove();
+//   });
    
-  imageElement.addEventListener('click', function () {
-    popupPhoto.src = data.link;
-    popupPhoto.alt = data.name;
-    popupCaption.textContent = data.name;
+//   imageElement.addEventListener('click', function () {
+//     popupPhoto.src = data.link;
+//     popupPhoto.alt = data.name;
+//     popupCaption.textContent = data.name;
+//     openPopup(imagePopup);
+//   });
+ 
+//   const likeButton = cardElement.querySelector('.photo-grid__button');
+//   likeButton.addEventListener('click', function () {
+//     likeButton.classList.toggle('photo-grid__button_active');
+//   });
+ 
+//   return cardElement;
+// }
+
+
+  function openImagePopup (cardData) {
+    // const imagePopup = document.querySelector('.popup-cards');
+    // const popupPhoto = imagePopup.querySelector('.popup__photo');
+    // const popupCaption = imagePopup.querySelector('.popup__photo-cap');  
+    popupPhoto.src = cardData.link;
+    popupPhoto.alt = cardData.name;
+    popupCaption.textContent = cardData.name;
     openPopup(imagePopup);
-  });
- 
-  const likeButton = cardElement.querySelector('.photo-grid__button');
-  likeButton.addEventListener('click', function () {
-    likeButton.classList.toggle('photo-grid__button_active');
-  });
- 
-  return cardElement;
-}
+  }
  
 function addCard(data) {
-  const newCardElement = createCardElement(data);
-  cardContainer.prepend(newCardElement);
+  const card = new Card(data, cardTemplateSelector, openImagePopup, data);
+  console.log(card);
+  const cardElement = card.generateCard();
+  cardContainer.prepend(cardElement);
 }
-
-
  
 initialCards.forEach(function (data) {
   addCard(data);
@@ -165,7 +184,6 @@ addForm.addEventListener('submit', function (event) {
   const submitButtonElement = addForm.querySelector('.popup__button');
   const inactiveButtonClass = 'popup__button_disabled';
   disableSubmitButton(submitButtonElement, inactiveButtonClass);
-  // получилось только так
 });
 
 
@@ -205,3 +223,4 @@ enableValidation({
   inputErrorClass: 'popup__input_error',
   errorClass: 'popup__error_visible',
 });
+
