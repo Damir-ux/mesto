@@ -9,7 +9,7 @@ class Card {
   
     _getTemplate() {
       const cardElement = document
-        .querySelector('#card-template')
+        .querySelector(this._cardTemplateSelector)
         .content.querySelector('.photo-grid__item')
         .cloneNode(true);
   
@@ -17,12 +17,9 @@ class Card {
     }
 
     _setData() {
-      const text = this._newCard.querySelector('.photo-grid__text');
-      text.textContent = this._name;
-  
-      const imageElement = this._newCard.querySelector('.photo-grid__image');
-      imageElement.src = this._link;
-      imageElement.alt = this._name;
+      this._textElement.textContent = this._name;
+      this._cardImage.src = this._link;
+      this._cardImage.alt = this._name;
     }
   
     _handleClickDelete() {
@@ -35,25 +32,23 @@ class Card {
     }
 
     _handleImageClick(){
-      this._openImagePopup(this._cardData);
+      this._openImagePopup({ name: this._name, link: this._link });
     }
     
   
     _setListeners() {
-      const deleteButton = this._newCard.querySelector('.photo-grid__trash');  
-      deleteButton.addEventListener('click', () => this._handleClickDelete());
-
-      const likeButton = this._newCard.querySelector('.photo-grid__button');
-      likeButton.addEventListener('click', () => this._handleLikeButton());
-  
-      const imageElement = this._newCard.querySelector('.photo-grid__image');
-      imageElement.addEventListener('click', () => this._handleImageClick());
+      this._deleteButton.addEventListener('click', () => this._handleClickDelete());
+      this._likeButton.addEventListener('click', () => this._handleLikeButton());
+      this._cardImage.addEventListener('click', () => this._handleImageClick());
     }
   
 
     generateCard() {
       this._newCard = this._getTemplate();
+      this._textElement = this._newCard.querySelector('.photo-grid__text');
+      this._cardImage = this._newCard.querySelector('.photo-grid__image');
       this._likeButton = this._newCard.querySelector('.photo-grid__button');
+      this._deleteButton = this._newCard.querySelector('.photo-grid__trash');
       this._setData();
       this._setListeners();
   

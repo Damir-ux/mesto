@@ -1,5 +1,5 @@
 import Card from "./Card.js";
-import Card from "./FormValidator.js";
+import FormValidator from "./FormValidator.js";
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -26,9 +26,6 @@ const cardTemplateSelector = '#card-template';
  
 const popupPhoto = imagePopup.querySelector('.popup__photo');
 const popupCaption = imagePopup.querySelector('.popup__photo-cap');
-
-
-
 
  
 const initialCards = [
@@ -142,19 +139,60 @@ function handleOverlayClick(evt) {
     openPopup(imagePopup);
   }
  
-function addCard(data) {
+// function addCard(data) {
+//   const card = new Card(data, cardTemplateSelector, openImagePopup, data);
+//   console.log(card);
+//   const cardElement = card.generateCard();
+//   cardContainer.prepend(cardElement);
+// }
+ 
+// initialCards.forEach(function (data) {
+//   addCard(data);
+// });
+
+// надеюсь правильно понял
+
+function createCard(data) {
   const card = new Card(data, cardTemplateSelector, openImagePopup, data);
-  console.log(card);
-  const cardElement = card.generateCard();
+  return card.generateCard();
+}
+
+function addCard(cardElement) {
   cardContainer.prepend(cardElement);
 }
- 
+
 initialCards.forEach(function (data) {
-  addCard(data);
+  const cardElement = createCard(data);
+  addCard(cardElement);
 });
+
  
 const profileForm = document.forms.PopupForm;
+
+const profileValidatorSettings = {
+  formSelector: '.profile-popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_error',
+  errorClass: 'popup__error_visible',
+};
+
+const profileFormValidator = new FormValidator(profileValidatorSettings, profileForm);
+profileFormValidator.enableValidation();
+
 const addForm = document.forms['add-form'];
+const addValidatorSettings = {
+  formSelector: '.popup-add__form',
+  inputSelector: '.popup-add__input',
+  submitButtonSelector: '.popup-add__button',
+  inactiveButtonClass: 'popup-add__button_disabled',
+  inputErrorClass: 'popup-add__input_error',
+  errorClass: 'popup-add__error_visible',
+};
+const addFormValidator = new FormValidator(addValidatorSettings, addForm);
+addFormValidator.enableValidation();
+
  
 profileForm.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -164,9 +202,9 @@ profileForm.addEventListener('submit', function (event) {
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = professionInput.value;
   closePopup(profilePopup);
-  const submitButtonElement = profileForm.querySelector('.popup__button');
-  const inactiveButtonClass = 'popup__button_disabled';
-  disableSubmitButton(submitButtonElement, inactiveButtonClass);
+  // const submitButtonElement = profileForm.querySelector('.popup__button');
+  // const inactiveButtonClass = 'popup__button_disabled';
+  // disableSubmitButton(submitButtonElement, inactiveButtonClass);
 });
  
 addForm.addEventListener('submit', function (event) {
@@ -181,9 +219,9 @@ addForm.addEventListener('submit', function (event) {
   addForm.reset();
   closePopup(addPopup);
 
-  const submitButtonElement = addForm.querySelector('.popup__button');
-  const inactiveButtonClass = 'popup__button_disabled';
-  disableSubmitButton(submitButtonElement, inactiveButtonClass);
+  // const submitButtonElement = addForm.querySelector('.popup__button');
+  // const inactiveButtonClass = 'popup__button_disabled';
+  // disableSubmitButton(submitButtonElement, inactiveButtonClass);
 });
 
 
@@ -215,12 +253,4 @@ addPopupContainer.addEventListener('click', handleOverlayClick);
 imagePopupContainer.addEventListener('click', handleOverlayClick);
 
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_error',
-  errorClass: 'popup__error_visible',
-});
 
