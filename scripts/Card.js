@@ -1,6 +1,6 @@
 class Card {
   constructor({ name, link }, cardTemplateSelector, openImagePopup, cardData) {
-    this._cardData = cardData;
+    // this._cardData = cardData;
     this._name = name;
     this._link = link;
     this._cardTemplateSelector = cardTemplateSelector;

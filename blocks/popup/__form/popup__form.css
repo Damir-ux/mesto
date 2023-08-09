@@ -1,15 +1,15 @@
 .popup__form{
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    /* gap: 0; */
     border: 0;
     margin: 0;
     padding: 0;
 }
 
 
-@media (min-width: 1280px) {
+/* @media (min-width: 1280px) {
     .popup__form{
         gap: 24px;
     }
-}
+} */

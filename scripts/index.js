@@ -150,7 +150,6 @@ function handleOverlayClick(evt) {
 //   addCard(data);
 // });
 
-// надеюсь правильно понял
 
 function createCard(data) {
   const card = new Card(data, cardTemplateSelector, openImagePopup, data);
@@ -167,10 +166,9 @@ initialCards.forEach(function (data) {
 });
 
  
-const profileForm = document.forms.PopupForm;
+// const profileForm = document.forms.PopupForm;
 
 const profileValidatorSettings = {
-  formSelector: '.profile-popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
@@ -178,18 +176,20 @@ const profileValidatorSettings = {
   errorClass: 'popup__error_visible',
 };
 
+const profileForm = profilePopup.querySelector('.popup__form');
 const profileFormValidator = new FormValidator(profileValidatorSettings, profileForm);
 profileFormValidator.enableValidation();
 
-const addForm = document.forms['add-form'];
+// const addForm = document.forms['add-form'];
 const addValidatorSettings = {
-  formSelector: '.popup-add__form',
-  inputSelector: '.popup-add__input',
-  submitButtonSelector: '.popup-add__button',
-  inactiveButtonClass: 'popup-add__button_disabled',
-  inputErrorClass: 'popup-add__input_error',
-  errorClass: 'popup-add__error_visible',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_error',
+  errorClass: 'popup__error_visible',
 };
+
+const addForm = addPopup.querySelector('.popup__form');
 const addFormValidator = new FormValidator(addValidatorSettings, addForm);
 addFormValidator.enableValidation();
 
@@ -219,6 +219,8 @@ addForm.addEventListener('submit', function (event) {
   addForm.reset();
   closePopup(addPopup);
 
+  // отключение кнопки отправки
+  addFormValidator.handleButtonState();
   // const submitButtonElement = addForm.querySelector('.popup__button');
   // const inactiveButtonClass = 'popup__button_disabled';
   // disableSubmitButton(submitButtonElement, inactiveButtonClass);
