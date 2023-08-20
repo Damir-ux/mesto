@@ -1,9 +1,12 @@
+import PopupWithImage from './PopupWithImage.js';
+
 class Card {
-  constructor({ name, link }, cardTemplateSelector, openImagePopup) {
+  constructor({ name, link }, cardTemplateSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._cardTemplateSelector = cardTemplateSelector;
-    this._openImagePopup = openImagePopup;
+    // this._openImagePopup = openImagePopup;
+    this._handleCardClick = handleCardClick;
     }
   
     _getTemplate() {
@@ -31,7 +34,8 @@ class Card {
     }
 
     _handleImageClick(){
-      this._openImagePopup({ name: this._name, link: this._link });
+      // this._openImagePopup({ name: this._name, link: this._link });
+      this._handleCardClick({ name: this._name, link: this._link });
     }
     
   
