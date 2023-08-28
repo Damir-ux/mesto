@@ -33,8 +33,7 @@ class Card {
       this._likeButton.classList.toggle('photo-grid__button_active');
     }
 
-    _handleImageClick(){
-      // this._openImagePopup({ name: this._name, link: this._link });
+    _handleImageClick(){      
       this._handleCardClick({ name: this._name, link: this._link });
     }
     
