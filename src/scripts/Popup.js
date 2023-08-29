@@ -27,7 +27,7 @@ class Popup {
     }
 
     _handleClickByOverlay = (event) => {      
-      if (event.target === this._popupContent) {
+      if (event.target === this._popup) {
         this.close();
       }   
   }
