@@ -119,7 +119,9 @@ const addFormValidator = new FormValidator(validatorSettings, addForm);
 addFormValidator.enableValidation();
  
  
-profilePopupOpenButton.addEventListener('click', function () {  
+profilePopupOpenButton.addEventListener('click', function () {
+  const currentUserInfo = userInfo.getUserInfo();
+  profilePopup.setInputValues(currentUserInfo);
   profilePopup.open();
   profileFormValidator.resetValidation();
   addFormValidator.resetValidation();
