@@ -7,13 +7,13 @@ class UserInfo {
     getUserInfo() {
       return {
         name: this._nameElement.textContent,
-        about: this._aboutElement.textContent
+        profession: this._aboutElement.textContent
       };
     }
   
-    setUserInfo({ name, about }) {
+    setUserInfo({ name, profession}) {
       this._nameElement.textContent = name;
-      this._aboutElement.textContent = about;
+      this._aboutElement.textContent = profession;
     }
   }
   

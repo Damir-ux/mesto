@@ -40,6 +40,7 @@ class FormValidator {
       }
     }
 
+   
     resetValidation() {
       this.handleButtonState();
 
