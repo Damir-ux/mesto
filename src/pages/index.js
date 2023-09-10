@@ -25,7 +25,8 @@ const cardTemplateSelector = '#card-template';
 // const profileSubtitle = document.querySelector('.profile__subtitle');
 const profilePopupOpenButton = document.querySelector('.profile__button-edit');
 // const buttonCloseList = document.querySelectorAll('.popup__close');
-const addPopupOpenButton = document.querySelector('.profile__button-add'); 
+const addPopupOpenButton = document.querySelector('.profile__button-add');
+const avatarOpenPopup = document.querySelector('.profile__avatar');
 // const cardContainer = document.querySelector('.photo-grid');
 
 const cardElementSelector = '.photo-grid';
@@ -33,7 +34,6 @@ const profilePopupSelector = '.profile-popup';
 const addCardPopupSelector = '.popup-add';
 const deletePopupSelector = '.popup_type_delete';
 const editAvatarPopupSelector = '.popup-edit-avatar';
-
 const imagePopup = new PopupWithImage('.popup-cards');
 
 
@@ -199,9 +199,9 @@ const deletePopup = new PopupWithDeleteForm(deletePopupSelector, (card, cardId) 
 });
 
 // При клике на мусорку
-deleteButton.addEventListener('click', () => {
-  deletePopup.open(card, cardId);
-});
+// deleteButton.addEventListener('click', () => {
+//   deletePopup.open(card, cardId);
+// });
 
 
 function handleDeleteCard(cardId) {
@@ -242,9 +242,9 @@ avatarEditPopup.setEventListeners();
 
 addCardPopup.setEventListeners();
 
-function openDelete(card, cardId) {
-  popupDelete.open({ card, cardId });
-}
+// function openDelete(card, cardId) {
+//   popupDelete.open({ card, cardId });
+// }
 
   function handleCardClick(cardData) {
     imagePopup.open(cardData);
@@ -282,10 +282,21 @@ addPopupOpenButton.addEventListener('click', function () {
   addCardPopup.open();
 });
  
+// popupFormAvatar.addEventListener('click', function () { 
+//   addFormValidator.resetValidation();
+//   addCardPopup.open();
+// });
 
+
+/**Функция открытия Popup аватара */
+// avatarOpenPopup.addEventListener('click', () => {
+//   popupFormAvatar.open();
+//   addFormValidator.resetValidation();
+// })
 
 
 imagePopup.setEventListeners();
+// popupFormAvatar.setEventListeners();
 
 Promise.all([api.getInfo(), api.getCards()])
 .then(([dUser, dCard]) => {  
