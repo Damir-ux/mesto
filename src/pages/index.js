@@ -32,8 +32,10 @@ const avatarOpenPopup = document.querySelector('.profile__avatar');
 const cardElementSelector = '.photo-grid';
 const profilePopupSelector = '.profile-popup';
 const addCardPopupSelector = '.popup-add';
+const avatarPopupSelector = '.popup-avatar';
+
 const deletePopupSelector = '.popup_type_delete';
-const editAvatarPopupSelector = '.popup-edit-avatar';
+// const editAvatarPopupSelector = '.popup-edit-avatar';
 const imagePopup = new PopupWithImage('.popup-cards');
 
 
@@ -267,7 +269,9 @@ profileFormValidator.enableValidation();
 const addForm = addCardPopup._formElement;
 const addFormValidator = new FormValidator(validatorSettings, addForm);
 addFormValidator.enableValidation();
- 
+
+// const avatarForm = popupFormAvatar._formElement;
+// const popupFormValidator = new FormValidator(validatorSettings, avatarForm);
 
 profilePopupOpenButton.addEventListener('click', function () {
   // const currentUserInfo = userInfo.getUserInfo();
@@ -286,23 +290,40 @@ addPopupOpenButton.addEventListener('click', function () {
 //   addFormValidator.resetValidation();
 //   addCardPopup.open();
 // });
+/**Функция создания Popup редактирования аватара */
+const popupFormAvatar = new PopupWithForm('.popup_type_avatar', {
+  submitCallback: (data) => {
+    popupFormAvatar.renderPreloader(true, 'Загрузка...')
+    api.setUserAvatar(data)
+    .then((resUser) => {
+      userInfo.setUserAvatar(resUser);
+      popupFormAvatar.close();
+    })
+    .catch((err) => alert(err))
+    .finally(() => {
+      popupFormAvatar.renderPreloader(false);
+    })
+  }
+})
+
 
 
 /**Функция открытия Popup аватара */
-// avatarOpenPopup.addEventListener('click', () => {
-//   popupFormAvatar.open();
-//   addFormValidator.resetValidation();
-// })
+avatarOpenPopup.addEventListener('click', () => {
+  // popupFormValidator.resetValidation();
+  popupFormAvatar.open();
+})
 
 
 imagePopup.setEventListeners();
 // popupFormAvatar.setEventListeners();
 
 Promise.all([api.getInfo(), api.getCards()])
-.then(([dUser, dCard]) => {  
-  dCard.forEach(element => element.myid = dUser._id);
- userInfo.setUserInfo({name: dUser.name, profession: dUser.about, avatar: dUser.avatar })
- cardSection.renderItems(dCard);
- console.log(dCard);
+.then(([dataUser, dataCard]) => { 
+  console.log(dataUser);
+  dataCard.forEach(element => element.myid = dataUser._id);
+ userInfo.setUserInfo({name: dataUser.name, profession: dataUser.about, avatar: dataUser.avatar })
+ cardSection.renderItems(dataCard);
+ console.log(dataCard);
 })
 .catch((error) => console.error(`Ошибка ${error}`));
