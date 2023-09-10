@@ -24,6 +24,7 @@
 @import url(../blocks/photo-grid/__button/photo-grid__button.css);
 @import url(../blocks/photo-grid/__button/_active/photo-grid__button_active.css);
 @import url(../blocks/photo-grid/__trash/photo-grid__trash.css);
+@import url(../blocks/photo-grid/__counter/photo-grid__counter.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__author/footer__author.css);
