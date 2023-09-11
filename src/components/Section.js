@@ -1,19 +1,31 @@
 class Section {
-    constructor({ items, renderer }, containerSelector) {
-      this._items = items;
-      this.renderer = renderer;
+    constructor(renderer, containerSelector) {      
+      this._renderer = renderer;
       this._container = document.querySelector(containerSelector);
       }
       
     
-      renderItems() {
-        this._items.forEach(item => {
-          this.addItem(this.renderer(item));
+      // renderItems(items, user) {
+      //   this._items.forEach(item => {
+      //     this._renderer(item, user);
+      //   });
+      // }
+
+  /**Отобразить контент */
+      // renderItems(items, user) {
+      //   items.forEach(item => {
+      //   this._renderer(item, user);
+      // });
+      // }
+
+      addCardFromServ(dataCard) {
+        dataCard.forEach(element => {
+            this._renderer(element);
         });
       }
     
-      addItem(cardElement) {
-        this._container.prepend(cardElement);
+      appendItem(cardElement) {
+        this._container.append(cardElement);
       }
 
 

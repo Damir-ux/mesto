@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>        
+    <head>
         <meta charset="UTF-8" >
         <meta name="viewport" content="width=device-width, initial-scale=1.0" >
         <title>Место</title>
@@ -12,7 +12,7 @@
                 <div class="photo-grid__signature">
                     <h2 class="photo-grid__text"></h2>
                     <button class="photo-grid__button" type="button"></button>
-                    <span class="photo-grid__counter">0</span>
+                    <span class="photo-grid__counter"></span>
                 </div>
             </div>
         </template>
@@ -25,7 +25,7 @@
             <main>
                 <section class="profile">
                     <!-- <img src="<%=require('./images/image.jpg')%>" alt="Место" class="profile__avatar"> -->
-                    <img src="#" alt="Место" class="profile__avatar">
+                    <button class="profile__avatar" type="button"><img src="#" alt="Место" class="profile__under-img"></button>
                     <div class="profile__column" >
                         <div class="profile__choise">
                             <!-- <h1 class="profile__title">Жак-Ив Кусто</h1> -->
@@ -91,30 +91,30 @@
         </div>
 
         <!-- Popup редактирования аватара -->
-        <div class="popup popup_type_avatar">            
+        <div class="popup popup-avatar">
             <div class="popup__container">
                 <button type="button" class="popup__close popup__close_avatar"></button>
                 <div class="popup__content">
                     <h3 class="popup__title">Обновить аватар</h3>
-                    <form class="popup__form popup__form_avatar" name="form-avatar" novalidate>
-                        <input type="url" class="popup__input popup__input_link" name="link" value="" required placeholder="Ссылка на картинку">
-                        <span id="link-error" class="popup__input-error"></span>
+                    <form class="popup__form popup__form_avatar" name="avatar-form" novalidate>
+                        <input type="url" class="popup__input popup__input_avatar" name="avatar" value="" required placeholder="Ссылка на картинку">
+                        <span id="avatar-error" class="popup__input-error"></span>
                         <input type="submit" class="popup__button popup__button_disabled" value="Создать" disabled="true">
                     </form>
                 </div>
             </div>
         </div>
   <!-- Popup подтверждения действия -->
-  <div class="popup popup_type_delete">
-    <div class="popup__container">
-        <button type="button" class="popup__close popup__close_add"></button>
-        <div class="popup__content">
-            <h3 class="popup__title">Вы уверенны?</h3>
-            <button class="popup__button popup__button_disabled" type="submit">Да</button>
-            <!-- <input type="submit" class="popup__button popup__button_disabled" value="Да" disabled="true"> -->
+        <div class="popup popup_type_delete">
+          <div class="popup__container">
+              <button type="button" class="popup__close popup__close_add"></button>
+              <div class="popup__content">
+                  <h3 class="popup__title">Вы уверены?</h3>
+                  <button class="popup__button popup__button_disabled" type="submit">Да</button>
+                  <!-- <input type="submit" class="popup__button popup__button_disabled" value="Да" disabled="true"> -->
+              </div>
+          </div>
         </div>
-    </div>
-  </div>
 
         <script src="./dist/main.js" defer></script>
     </body>

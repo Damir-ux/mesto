@@ -35,10 +35,10 @@ setUserInfo(data){
         headers: this._headers,
         body: JSON.stringify({
             name: data.name,
-            about: data.about,
+            about: data.profession,
         })
     })
-    .then(res => res.ok ? res.json() : Promise.reject)
+    .then(this._checkResponse)
 
 }
 
@@ -51,7 +51,7 @@ setAvatar(data){
             
         })
     })
-    .then(res => res.ok ? res.json() : Promise.reject)
+    .then(this._checkResponse)
 
 }
 
@@ -65,33 +65,41 @@ addCard(data){
             
         })
     })
-    .then(res => res.ok ? res.json() : Promise.reject)
+    .then(this._checkResponse)
 
 }
 
 deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
         method: 'DELETE',
-        headers: this._headers,
+        headers: {
+            authorization: this._authorization
+        }
     })
-    .then(res => res.ok ? res.json() : Promise.reject())
+    .then(this._checkResponse)
 }
 
 
 addLike(cardId) {
-    return fetch(`${this._url}/cards/${cardId}/likes/`, {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
         method: 'PUT',
-        headers: this._headers,
+        headers: {
+            authorization: this._authorization
+        }
     })
-    .then(res => res.ok ? res.json() : Promise.reject())
+    .then(this._checkResponse)
 }
+
+
 
 removeLike(cardId) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
         method: 'DELETE',
-        headers: this._headers,
+        headers: {
+            authorization: this._authorization
+        }
     })
-    .then(res => res.ok ? res.json() : Promise.reject())
+    .then(this._checkResponse)
 }
 
 }

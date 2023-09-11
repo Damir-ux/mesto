@@ -1,16 +1,17 @@
 import PopupWithImage from './PopupWithImage.js';
 
 class Card {
-  constructor(dCard, cardTemplateSelector, handleCardClick, changeLike, openDelete) {
-    console.log(dCard);
-    this._myid = dCard.myid;
-    this._ownerid = dCard._id;
-    this._cardId = dCard._id;
-    this._name = dCard.name;
+  constructor(cardData, cardTemplateSelector, handleCardClick, openDelete, changeLike) {
+    // console.log(cardData);
+    this._myid = cardData.myid;
+    this._ownerid = cardData.owner._id;
+    this._cardId = cardData._id;
+    this._name = cardData.name;
     this._openDelete = openDelete;
-    this._link = dCard.link;
-    this._likes = dCard.likes;
-    this._likes = dCard.likes || [];
+    this._link = cardData.link;
+    this._likes = cardData.likes;
+    this._likesLength = cardData.likes.length;
+    // this._likes = cardData.likes || [];
     // this._likesCount = dCard.likes.length;
     this._cardTemplateSelector = cardTemplateSelector;
     this._changeLike = changeLike;
@@ -34,9 +35,7 @@ class Card {
     }
   
     _handleClickDelete() {
-      // this._newCard.remove();
-      // this._newCard = null;
-      // this._openDelete(this, this._cardId);
+      this._openDelete({ card: this, cardId: this._cardId});
     }
 
     deleteCard() {
@@ -46,17 +45,7 @@ class Card {
     
 
     _handleLikeButton() {
-      this._changeLike(this._likeButton, this._cardId)
-      // this._likeButton.classList.toggle('photo-grid__button_active');
-      // if (this._likeButton.classList.contains('photo-grid__button_active')) {
-      //   this._likesCount++;
-      //   this._addLike();
-      // } else {
-      //   this._likesCount--;
-      //   this._removeLike();
-      // }
-      // this._counter.textContent = this._likesCount;
- 
+      this._changeLike(this._likeButton, this._cardId);      
     }
 
 
@@ -81,11 +70,13 @@ class Card {
     }
 
     _checkLike() {
-      const hasLiked = this._likes.some(item => item._id === this._myid);
-      if (hasLiked) {
-        this._likeButton.classList.add('photo-grid__button_active');
-      }
-      this._counter.textContent = this._likesLength;
+      this._likes.forEach(item => {
+        if (item._id === this._myid) {
+            this._likeButton.classList.add('photo-grid__button_active')
+            return
+          }
+      })
+      this._counter.textContent = this._likesLength
     }
 
 
@@ -96,7 +87,6 @@ class Card {
       this._likeButton = this._newCard.querySelector('.photo-grid__button');
       this._deleteButton = this._newCard.querySelector('.photo-grid__trash');
       this._counter = this._newCard.querySelector('.photo-grid__counter');
-      this._counter.textContent = this._likesCount;
       this._setData();
       this._setListeners();
       this._visibleTrash();
