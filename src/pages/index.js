@@ -14,7 +14,7 @@ import { data } from "autoprefixer";
 const userInfo = new UserInfo({
   nameSelector: '.profile__title',
   aboutSelector: '.profile__subtitle',
-  profileSelector: '.profile__avatar'
+  profileSelector: '.profile__under-img'
 });
 
 const currentUserInfo = userInfo.getUserInfo();
@@ -38,34 +38,6 @@ const deletePopupSelector = '.popup_type_delete';
 
 // const editAvatarPopupSelector = '.popup-edit-avatar';
 const imagePopup = new PopupWithImage('.popup-cards');
-
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
  
 
 const cardSection = new Section((element) => {
@@ -97,42 +69,88 @@ const profilePopup = new PopupWithForm(profilePopupSelector, (data) => {
 
 profilePopup.setEventListeners();
 
-const changeLike = (likeElement, cardId) => {
-  
-};
 
+// const deleteImage= (deleteElement, cardId) => {
+//   api.deleteCard(cardId)
+//     .then(() => {
+//       deleteElement.deleteCard();
+//     })
+//     .catch((error) => console.error(`Ошибка при удалении карточки ${error}`));
+// };
+
+
+
+// function createCard(element) {
+//   const card = new Card(element, cardTemplateSelector, handleCardClick, deleteImage, (likeElement, cardId) => {
+//     if(likeElement.classList.contains('photo-grid__button_active'))
+//     {
+//       api.removeLike(cardId)
+//       .then(res => {
+//         card.toggleLikes(res.likes);
+//        })
+//        .catch((error) => console.error(`Ошибка дизактивации лайка ${error}`))
+//     } else {
+//       api.addLike(cardId)
+//       .then(res => {
+//         card.toggleLikes(res.likes);
+//        })
+//        .catch((error) => console.error(`Ошибка активации лайка ${error}`))
+//     }
+//   });
+//   return card.generateCard();
+// }
+
+// не могу понять почему не работает удаление. Вроде все то, но не отрабатывает
 function createCard(element) {
-  const card = new Card(element, cardTemplateSelector, handleCardClick, changeLike, (likeElement, cardId) => {
-    if(likeElement.classList.contains('photo-grid__button_active'))
-    {
-      api.removeLike(cardId)
+  const deleteImage = (cardId) => {
+    api.deleteCard(cardId)
       .then(() => {
-        console.log(res)
-        card.toggleLikes(res.likes);
-       })
-       .catch((error) => console.error(`Ошибка дизактивации лайка ${error}`))
+        card.deleteCard();
+      })
+      .catch((error) => console.error(`Ошибка при удалении карточки ${error}`));
+  };
+
+  const card = new Card(element, cardTemplateSelector, handleCardClick, deleteImage, (likeElement, cardId) => {
+    if(likeElement.classList.contains('photo-grid__button_active')) {
+      api.removeLike(cardId)
+        .then(res => {
+          card.toggleLikes(res.likes);
+        })
+        .catch((error) => console.error(`Ошибка дизактивации лайка ${error}`))
     } else {
       api.addLike(cardId)
-      .then(res => {
-        card.toggleLikes(res.likes);
-       })
-       .catch((error) => console.error(`Ошибка активации лайка ${error}`))
+        .then(res => {
+          card.toggleLikes(res.likes);
+        })
+        .catch((error) => console.error(`Ошибка активации лайка ${error}`))
     }
   });
+
   return card.generateCard();
 }
 
 
-const addCardPopup = new PopupWithForm(addCardPopupSelector, (formData) => {
-  Promise.all([api.getInfo(), api.addCard(formData)])
-     .then(([dataUser, dataCard]) => {
-      dataCard.myid = dataUser._id;
-      cardSection.prependItem(createCard(dataCard))
-      addCardPopup.close();
-     })
-     .catch((error) => console.error(`Ошибка ${error}`))
-     .finally(() => addCardPopup.setupText())
-});
+
+
+
+let userId;
+
+api.getInfo()
+  .then(dataUser => {
+    userId = dataUser.id;
+  })
+  .catch(error => console.error(`Error: ${error}`));
+
+  const addCardPopup = new PopupWithForm(addCardPopupSelector, (formData) => { 
+    api.addCard(formData)
+      .then(dataCard => {
+        dataCard.myid = userId; // Assuming userId is available in this scope
+        cardSection.prependItem(createCard(dataCard));
+        addCardPopup.close();
+      })
+      .catch(error => console.error(`Error: ${error}`))
+      .finally(() => addCardPopup.setupText())
+  });
 
 
 const deletePopup = new PopupWithDeleteForm(deletePopupSelector, ({card, cardId}) => {
@@ -185,7 +203,7 @@ const avataFormValidator = new FormValidator(validatorSettings, avatarForm);
 avataFormValidator.enableValidation();
 
 profilePopupOpenButton.addEventListener('click', function () {  
-  profilePopup.setInputValues(currentUserInfo);
+  profilePopup.setInputValues(userInfo.getUserInfo());
   profileFormValidator.resetValidation();
   profilePopup.open();
 });
@@ -209,12 +227,18 @@ avatarOpenPopup.addEventListener('click', () => {
 imagePopup.setEventListeners();
 // popupFormAvatar.setEventListeners();
 
+
 Promise.all([api.getInfo(), api.getCards()])
-.then(([dataUser, dataCard]) => { 
-  console.log(dataUser);
-  dataCard.forEach(element => element.myid = dataUser._id);
- userInfo.setUserInfo({name: dataUser.name, profession: dataUser.about, avatar: dataUser.avatar })
- cardSection.addCardFromServ(dataCard);
-//  console.log(dataCard);
-})
-.catch((error) => console.error(`Ошибка ${error}`));
+  .then(([dataUser, dataCard]) => {
+    // console.log(dataUser);
+    userId = dataUser._id;
+    dataCard.forEach(element => element.myid = userId);
+    userInfo.setUserInfo({name: dataUser.name, profession: dataUser.about, avatar: dataUser.avatar });
+    cardSection.addCardFromServ(dataCard);
+  })
+  .catch((error) => console.error(`Error: ${error}`));
+
+
+
+
+
