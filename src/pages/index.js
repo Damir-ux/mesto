@@ -21,13 +21,9 @@ const currentUserInfo = userInfo.getUserInfo();
 
 
 const cardTemplateSelector = '#card-template';
-// const profileTitle = document.querySelector('.profile__title');
-// const profileSubtitle = document.querySelector('.profile__subtitle');
 const profilePopupOpenButton = document.querySelector('.profile__button-edit');
-// const buttonCloseList = document.querySelectorAll('.popup__close');
 const addPopupOpenButton = document.querySelector('.profile__button-add');
 const avatarOpenPopup = document.querySelector('.profile__avatar');
-// const cardContainer = document.querySelector('.photo-grid');
 const deleteOpenPopup = document.querySelector('photo-grid__trash');
 
 const cardElementSelector = '.photo-grid';
@@ -36,7 +32,7 @@ const addCardPopupSelector = '.popup-add';
 const avatarPopupSelector = '.popup-avatar';
 const deletePopupSelector = '.popup_type_delete';
 
-// const editAvatarPopupSelector = '.popup-edit-avatar';
+
 const imagePopup = new PopupWithImage('.popup-cards');
  
 
@@ -70,45 +66,12 @@ const profilePopup = new PopupWithForm(profilePopupSelector, (data) => {
 profilePopup.setEventListeners();
 
 
-// const deleteImage= (deleteElement, cardId) => {
-//   api.deleteCard(cardId)
-//     .then(() => {
-//       deleteElement.deleteCard();
-//     })
-//     .catch((error) => console.error(`Ошибка при удалении карточки ${error}`));
-// };
+// Спасибо!!! И за ссылку тоже!
 
-
-
-// function createCard(element) {
-//   const card = new Card(element, cardTemplateSelector, handleCardClick, deleteImage, (likeElement, cardId) => {
-//     if(likeElement.classList.contains('photo-grid__button_active'))
-//     {
-//       api.removeLike(cardId)
-//       .then(res => {
-//         card.toggleLikes(res.likes);
-//        })
-//        .catch((error) => console.error(`Ошибка дизактивации лайка ${error}`))
-//     } else {
-//       api.addLike(cardId)
-//       .then(res => {
-//         card.toggleLikes(res.likes);
-//        })
-//        .catch((error) => console.error(`Ошибка активации лайка ${error}`))
-//     }
-//   });
-//   return card.generateCard();
-// }
-
-// не могу понять почему не работает удаление. Вроде все то, но не отрабатывает
 function createCard(element) {
-  const deleteImage = (cardId) => {
-    api.deleteCard(cardId)
-      .then(() => {
-        card.deleteCard();
-      })
-      .catch((error) => console.error(`Ошибка при удалении карточки ${error}`));
-  };
+  const deleteImage = (cardElement, cardId) => {
+    deletePopup.open(cardElement, cardId)
+    }
 
   const card = new Card(element, cardTemplateSelector, handleCardClick, deleteImage, (likeElement, cardId) => {
     if(likeElement.classList.contains('photo-grid__button_active')) {
@@ -131,8 +94,6 @@ function createCard(element) {
 
 
 
-
-
 let userId;
 
 api.getInfo()
@@ -140,11 +101,10 @@ api.getInfo()
     userId = dataUser.id;
   })
   .catch(error => console.error(`Error: ${error}`));
-
   const addCardPopup = new PopupWithForm(addCardPopupSelector, (formData) => { 
     api.addCard(formData)
       .then(dataCard => {
-        dataCard.myid = userId; // Assuming userId is available in this scope
+        dataCard.myid = userId;
         cardSection.prependItem(createCard(dataCard));
         addCardPopup.close();
       })
@@ -220,17 +180,13 @@ avatarOpenPopup.addEventListener('click', () => {
   avatarEditPopup.open();
 })
 
-// deleteOpenPopup.addEventListener('click', () => {
-//   deletePopup.open();
-// });
 
 imagePopup.setEventListeners();
-// popupFormAvatar.setEventListeners();
+
 
 
 Promise.all([api.getInfo(), api.getCards()])
   .then(([dataUser, dataCard]) => {
-    // console.log(dataUser);
     userId = dataUser._id;
     dataCard.forEach(element => element.myid = userId);
     userInfo.setUserInfo({name: dataUser.name, profession: dataUser.about, avatar: dataUser.avatar });

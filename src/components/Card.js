@@ -1,8 +1,6 @@
-import PopupWithImage from './PopupWithImage.js';
 
 class Card {
   constructor(cardData, cardTemplateSelector, handleCardClick, openDelete, changeLike) {
-    // console.log(cardData);
     this._myid = cardData.myid;
     this._ownerid = cardData.owner._id;
     this._cardId = cardData._id;
@@ -11,11 +9,8 @@ class Card {
     this._link = cardData.link;
     this._likes = cardData.likes;
     this._likesLength = cardData.likes.length;
-    // this._likes = cardData.likes || [];
-    // this._likesCount = dCard.likes.length;
     this._cardTemplateSelector = cardTemplateSelector;
     this._changeLike = changeLike;
-    // this._openImagePopup = openImagePopup;
     this._handleCardClick = handleCardClick;
     }
   

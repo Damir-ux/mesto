@@ -5,8 +5,8 @@ class PopupWithDeleteForm extends Popup {
     super(popupSelector);
     this._submitCallback = submitCallback;
     this._formElement = this._popup.querySelector('.popup__form');
-    this._submitButton = this._popup.querySelector('.popup__button');
-    this._defaultText = this._submitButton.textContent;
+    this.submitButton = this._popup.querySelector('.popup__button');
+    this._defaultText = this.submitButton.textContent;
   }
 
 
@@ -19,7 +19,7 @@ class PopupWithDeleteForm extends Popup {
   
   setEventListeners() {
     super.setEventListeners();
-    this._submitButton.addEventListener('click', () => {
+    this.submitButton.addEventListener('click', () => {
       this.submitButton.textContent = `${this.submitButton.textContent}...`
       this._submitCallback({ card: this._element, cardId: this._cardId});
     })
